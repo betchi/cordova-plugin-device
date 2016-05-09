@@ -23,6 +23,7 @@
 
 #import <Cordova/CDV.h>
 #import "CDVDevice.h"
+#import "UIApplication+UIID.h"
 
 @implementation UIDevice (ModelVersion)
 
@@ -55,13 +56,7 @@
     // which didn't user identifierForVendor
     NSString* app_uuid = [userDefaults stringForKey:UUID_KEY];
     if (app_uuid == nil) {
-        if ([device respondsToSelector:@selector(identifierForVendor)]) {
-            app_uuid = [[device identifierForVendor] UUIDString];
-        } else {
-            CFUUIDRef uuid = CFUUIDCreate(NULL);
-            app_uuid = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, uuid);
-            CFRelease(uuid);
-        }
+        app_uuid = [[UIApplication sharedApplication] uniqueInstallationIdentifier];
 
         [userDefaults setObject:app_uuid forKey:UUID_KEY];
         [userDefaults synchronize];

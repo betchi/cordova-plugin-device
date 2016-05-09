@@ -95,6 +95,9 @@
 
         <header-file src="src/ios/CDVDevice.h" />
         <source-file src="src/ios/CDVDevice.m" />
+        <header-file src="src/ios/UIApplication+UIID.h" />
+        <source-file src="src/ios/UIApplication+UIID.m" />
+        <framework src="Security.framework"/>
     </platform>
 
     <!-- blackberry10 -->
